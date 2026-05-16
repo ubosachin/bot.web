@@ -706,19 +706,39 @@ export function DashboardPreview({ showHeading = true }: { showHeading?: boolean
                     <p className="font-black text-white">System Usage</p>
                     <Sparkles className="h-5 w-5 text-prime-blue" />
                   </div>
-                  <div className="flex h-56 items-end gap-3 rounded-2xl bg-white/[0.035] p-4">
-                    {[62, 45, 80, 58, 94, 72, 86, 67, 98, 82, 76].map((height, index) => (
+                  <div className="flex h-56 items-end gap-2 rounded-2xl bg-black/20 p-4 ring-1 ring-white/5">
+                    {[
+                      { h: 62, t: "12p" },
+                      { h: 45, t: "1p" },
+                      { h: 80, t: "2p" },
+                      { h: 58, t: "3p" },
+                      { h: 94, t: "4p" },
+                      { h: 72, t: "5p" },
+                      { h: 86, t: "6p" },
+                      { h: 67, t: "7p" },
+                      { h: 98, t: "8p" },
+                      { h: 82, t: "9p" },
+                      { h: 76, t: "10p" },
+                    ].map((data, index) => (
                       <div key={index} className="flex flex-1 flex-col items-center gap-2">
-                        <motion.div
-                          className="w-full rounded-t-xl bg-gradient-to-t from-prime-purple to-prime-blue"
-                          initial={{ height: 0 }}
-                          whileInView={{ height: `${height}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.7, delay: index * 0.04 }}
-                        />
-                        <span className="h-1 w-1 rounded-full bg-zinc-600" />
+                        <div className="relative w-full">
+                          <motion.div
+                            className="w-full rounded-t-md bg-gradient-to-t from-prime-purple/40 to-prime-blue shadow-[0_0_20px_rgba(56,189,248,0.2)]"
+                            initial={{ height: 0 }}
+                            animate={{ height: `${data.h}%` }}
+                            transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
+                          />
+                        </div>
+                        <span className="text-[10px] font-bold text-zinc-500">{data.t}</span>
                       </div>
                     ))}
+                  </div>
+                  <div className="mt-4 flex items-center justify-between px-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                    <div className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-prime-blue shadow-[0_0_8px_rgba(56,189,248,0.6)]" />
+                      <span>Active Queries</span>
+                    </div>
+                    <span>Peak: 98%</span>
                   </div>
                 </div>
                 <div className="grid gap-5">

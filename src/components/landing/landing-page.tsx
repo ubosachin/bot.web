@@ -720,15 +720,18 @@ export function DashboardPreview() {
                       </div>
                     ))}
                   </div>
-                  <div className="relative h-44 overflow-hidden rounded-3xl border border-white/10 bg-black/35 p-5">
-                    <p className="mb-6 font-black text-white opacity-80">Activity Logs</p>
-                    <div className="animate-terminal space-y-4">
-                      {[...terminalLines, ...terminalLines].map((line, index) => (
-                        <p key={index} className="font-mono text-[0.7rem] tracking-tight text-zinc-400">
-                          <span className="mr-2 text-prime-blue/70">prime:~$</span>
-                          <span className="text-zinc-200">{line.replace("> ", "")}</span>
-                        </p>
-                      ))}
+                  <div className="relative flex h-44 flex-col rounded-3xl border border-white/10 bg-black/35 p-5">
+                    <p className="mb-4 shrink-0 font-black text-white opacity-80">Activity Logs</p>
+                    <div className="relative flex-1 overflow-hidden">
+                      <div className="animate-terminal space-y-4">
+                        {[...terminalLines, ...terminalLines].map((line, index) => (
+                          <p key={index} className="font-mono text-[0.7rem] tracking-tight text-zinc-400">
+                            <span className="mr-2 text-prime-blue/70">prime:~$</span>
+                            <span className="text-zinc-200">{line.replace("> ", "")}</span>
+                          </p>
+                        ))}
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
                     </div>
                   </div>
                 </div>

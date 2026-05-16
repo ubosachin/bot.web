@@ -597,7 +597,7 @@ export function Offer() {
             </div>
           </div>
           <div className="grid gap-4">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {["02", "11", "38", "44"].map((value, index) => (
                 <div key={index} className="rounded-3xl border border-white/10 bg-black/30 p-4 text-center">
                   <p className="text-2xl font-black text-white sm:text-3xl">{value}</p>
@@ -650,7 +650,7 @@ export function DashboardPreview() {
                   <p className="text-xs text-zinc-500">Admin Console</p>
                 </div>
               </div>
-              <div className="grid gap-2">
+              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
                 {commandSystems.slice(0, 7).map((system, index) => (
                   <div
                     key={system.name}
@@ -687,7 +687,7 @@ export function DashboardPreview() {
                   </div>
                 ))}
               </div>
-              <div className="mt-5 grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
+              <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-[1.1fr_0.9fr]">
                 <div className="rounded-3xl border border-white/10 bg-black/25 p-5">
                   <div className="mb-5 flex items-center justify-between">
                     <p className="font-black text-white">System Usage</p>

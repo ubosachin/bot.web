@@ -650,12 +650,12 @@ export function DashboardPreview() {
                   <p className="text-xs text-zinc-500">Admin Console</p>
                 </div>
               </div>
-              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="no-scrollbar flex gap-2 overflow-x-auto pb-4 lg:grid lg:gap-2 lg:overflow-visible lg:pb-0">
                 {commandSystems.slice(0, 7).map((system, index) => (
                   <div
                     key={system.name}
                     className={cn(
-                      "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-bold",
+                      "flex shrink-0 items-center gap-3 rounded-2xl px-4 py-3 text-sm font-bold whitespace-nowrap lg:shrink",
                       index === 0 ? "bg-prime-blue text-black" : "text-zinc-400 hover:bg-white/10 hover:text-white",
                     )}
                   >
@@ -675,7 +675,7 @@ export function DashboardPreview() {
                   <LogIn className="h-4 w-4" /> Discord OAuth
                 </Button>
               </div>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
                 {dashboardStats.map((item) => (
                   <div key={item.label} className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
                     <div className="mb-5 flex items-center justify-between">

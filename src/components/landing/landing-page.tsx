@@ -635,6 +635,8 @@ export function Offer() {
 }
 
 export function DashboardPreview({ showHeading = true }: { showHeading?: boolean }) {
+  const [activeTab, setActiveTab] = useState(commandSystems[0].name);
+
   return (
     <section className={cn("px-5 lg:px-8", showHeading ? "py-24" : "pb-24 pt-4")}>
       <div className="mx-auto max-w-7xl">
@@ -664,17 +666,18 @@ export function DashboardPreview({ showHeading = true }: { showHeading?: boolean
                 </div>
               </div>
               <div className="no-scrollbar flex gap-2 overflow-x-auto pb-4 lg:grid lg:gap-2 lg:overflow-visible lg:pb-0">
-                {commandSystems.slice(0, 7).map((system, index) => (
-                  <div
+                {commandSystems.slice(0, 7).map((system) => (
+                  <button
                     key={system.name}
+                    onClick={() => setActiveTab(system.name)}
                     className={cn(
-                      "flex shrink-0 items-center gap-3 rounded-2xl px-4 py-3 text-sm font-bold whitespace-nowrap lg:shrink",
-                      index === 0 ? "bg-prime-blue text-black" : "text-zinc-400 hover:bg-white/10 hover:text-white",
+                      "flex shrink-0 items-center gap-3 rounded-2xl px-4 py-3 text-sm font-bold transition-all whitespace-nowrap lg:shrink",
+                      activeTab === system.name ? "bg-prime-blue text-black shadow-lg shadow-prime-blue/20" : "text-zinc-400 hover:bg-white/10 hover:text-white",
                     )}
                   >
-                    <span className="h-2 w-2 rounded-full bg-current" />
+                    <span className={cn("h-2 w-2 rounded-full", activeTab === system.name ? "bg-black" : "bg-current")} />
                     {system.name}
-                  </div>
+                  </button>
                 ))}
               </div>
             </aside>

@@ -30,6 +30,11 @@ export const metadata: Metadata = {
       "Complete Discord management for esports and communities: security, automod, moderation, tickets, music, giveaways, utilities, voice control, and premium automation.",
     type: "website",
   },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

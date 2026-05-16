@@ -162,8 +162,8 @@ function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         <Link href="/" className="group flex items-center gap-3" aria-label="CUTIE Prime home">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-prime-purple to-prime-blue shadow-glow transition group-hover:scale-105">
-            <Heart className="h-5 w-5 fill-white text-white" />
+          <span className="relative h-10 w-10 overflow-hidden rounded-2xl bg-gradient-to-br from-prime-purple to-prime-blue shadow-glow transition group-hover:scale-105">
+            <img src="/logo.png" alt="CUTIE Prime Logo" className="h-full w-full object-cover" />
           </span>
           <span className="leading-none">
             <span className="block text-sm font-black tracking-wide text-white">CUTIE &lt;3</span>
@@ -915,8 +915,8 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr_0.9fr_0.9fr]">
         <div>
           <div className="mb-4 flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-prime-purple to-prime-blue">
-              <Heart className="h-5 w-5 fill-white" />
+            <div className="relative h-11 w-11 overflow-hidden rounded-2xl bg-gradient-to-br from-prime-purple to-prime-blue">
+              <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
             </div>
             <div>
               <p className="font-black text-white">CUTIE &lt;3 Prime</p>

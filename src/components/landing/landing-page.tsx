@@ -721,11 +721,12 @@ export function DashboardPreview() {
                     ))}
                   </div>
                   <div className="relative h-44 overflow-hidden rounded-3xl border border-white/10 bg-black/35 p-5">
-                    <p className="mb-4 font-black text-white">Activity Logs</p>
-                    <div className="animate-terminal space-y-3">
+                    <p className="mb-6 font-black text-white opacity-80">Activity Logs</p>
+                    <div className="animate-terminal space-y-4">
                       {[...terminalLines, ...terminalLines].map((line, index) => (
-                        <p key={index} className="font-mono text-xs text-zinc-400">
-                          <span className="text-prime-blue">prime</span> {line}
+                        <p key={index} className="font-mono text-[0.7rem] tracking-tight text-zinc-400">
+                          <span className="mr-2 text-prime-blue/70">prime:~$</span>
+                          <span className="text-zinc-200">{line.replace("> ", "")}</span>
                         </p>
                       ))}
                     </div>

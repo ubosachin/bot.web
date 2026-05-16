@@ -451,7 +451,7 @@ export function Features() {
   );
 }
 
-export function CommandsCatalog({ full = false }: { full?: boolean }) {
+export function CommandsCatalog({ full = false, showHeading = true }: { full?: boolean; showHeading?: boolean }) {
   const [active, setActive] = useState("All");
   const [query, setQuery] = useState("");
   const categories = ["All", ...commandSystems.map((system) => system.name)];
@@ -467,26 +467,31 @@ export function CommandsCatalog({ full = false }: { full?: boolean }) {
     <section id="commands" className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
       <div className="absolute left-[-140px] top-20 h-96 w-96 rounded-full bg-prime-purple/15 blur-[110px]" />
       <div className="mx-auto max-w-7xl">
-        <div className="grid min-w-0 gap-8 xl:grid-cols-[minmax(300px,0.72fr)_minmax(0,1.28fr)] xl:items-start">
-          <motion.div
-            variants={reveal}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl xl:max-w-xl"
-          >
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-prime-blue/25 bg-prime-blue/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-prime-blue">
-              <Sparkles className="h-4 w-4" />
-              Command Center
-            </div>
-            <h2 className="text-balance text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-5xl">
-              {full ? "Search every real CUTIE <3 Prime command." : "A Discord-style command center with real systems."}
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
-              {totalRealCommands} listed production commands across {commandSystems.length} categories, with filters for staff, owners, music teams, and community managers.
-            </p>
-          </motion.div>
+        {showHeading && (
+          <div className="grid min-w-0 gap-8 xl:grid-cols-[minmax(300px,0.72fr)_minmax(0,1.28fr)] xl:items-start">
+            <motion.div
+              variants={reveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6 }}
+              className="max-w-4xl xl:max-w-xl"
+            >
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-prime-blue/25 bg-prime-blue/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-prime-blue">
+                <Sparkles className="h-4 w-4" />
+                Command Center
+              </div>
+              <h2 className="text-balance text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl xl:text-4xl 2xl:text-5xl">
+                {full ? "Search every real CUTIE <3 Prime command." : "A Discord-style command center with real systems."}
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-400 sm:text-lg">
+                {totalRealCommands} listed production commands across {commandSystems.length} categories, with filters for staff, owners, music teams, and community managers.
+              </p>
+            </motion.div>
+          </div>
+        )}
+        <div className={cn("grid min-w-0 gap-8 xl:grid-cols-[minmax(300px,0.72fr)_minmax(0,1.28fr)] xl:items-start", showHeading ? "mt-0" : "mt-0")}>
+          <div className="hidden xl:block" />
           <motion.div
             variants={reveal}
             initial="hidden"
@@ -629,16 +634,24 @@ export function Offer() {
   );
 }
 
-export function DashboardPreview() {
+export function DashboardPreview({ showHeading = true }: { showHeading?: boolean }) {
   return (
-    <section className="px-5 py-24 lg:px-8">
+    <section className={cn("px-5 lg:px-8", showHeading ? "py-24" : "pb-24 pt-4")}>
       <div className="mx-auto max-w-7xl">
-        <SectionHeading
-          eyebrow="Dashboard Preview"
-          title="A premium command console for Discord operators."
-          text="Preview how security, automod, tickets, utility, giveaway, music, voice, and premium systems can be presented in a modern dashboard."
-        />
-        <motion.div variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="glass mt-14 overflow-hidden rounded-[2rem]">
+        {showHeading && (
+          <SectionHeading
+            eyebrow="Dashboard Preview"
+            title="A premium command console for Discord operators."
+            text="Preview how security, automod, tickets, utility, giveaway, music, voice, and premium systems can be presented in a modern dashboard."
+          />
+        )}
+        <motion.div
+          variants={reveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className={cn("glass overflow-hidden rounded-[2rem]", showHeading ? "mt-14" : "mt-0")}
+        >
           <div className="grid min-h-[640px] lg:grid-cols-[240px_1fr]">
             <aside className="border-b border-white/10 bg-black/20 p-5 lg:border-b-0 lg:border-r lg:border-white/10">
               <div className="mb-8 flex items-center gap-3">
@@ -1060,8 +1073,8 @@ export function DashboardPageContent() {
         title="Discord bot analytics with a premium esports command-console feel."
         text="A realistic dashboard preview for system health, command activity, security status, ticket workflows, and voice or giveaway operations."
       />
-      <DashboardPreview />
-      <CommandsCatalog />
+      <DashboardPreview showHeading={false} />
+      <CommandsCatalog showHeading={true} />
     </>
   );
 }

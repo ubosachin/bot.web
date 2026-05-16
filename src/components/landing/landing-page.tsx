@@ -720,8 +720,8 @@ export function DashboardPreview({ showHeading = true }: { showHeading?: boolean
                       { h: 82, t: "9p" },
                       { h: 76, t: "10p" },
                     ].map((data, index) => (
-                      <div key={index} className="flex flex-1 flex-col items-center gap-2">
-                        <div className="relative w-full">
+                      <div key={index} className="flex h-full flex-1 flex-col items-center gap-2">
+                        <div className="relative flex flex-1 items-end w-full">
                           <motion.div
                             className="w-full rounded-t-md bg-gradient-to-t from-prime-purple/40 to-prime-blue shadow-[0_0_20px_rgba(56,189,248,0.2)]"
                             initial={{ height: 0 }}

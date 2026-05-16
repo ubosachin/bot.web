@@ -637,6 +637,82 @@ export function Offer() {
 export function DashboardPreview({ showHeading = true }: { showHeading?: boolean }) {
   const [activeTab, setActiveTab] = useState(commandSystems[0].name);
 
+  // Dynamic content based on active tab
+  const activeStats = useMemo(() => {
+    const base = [
+      { label: "Commands Tracked", value: "120+", icon: Command, trend: "+12%" },
+      { label: "Systems Online", value: "11", icon: Zap, trend: "Stable" },
+      { label: "Security Modules", value: "7", icon: Shield, trend: "Live" },
+      { label: "Utility Tools", value: "22", icon: Package, trend: "+5%" },
+    ];
+
+    if (activeTab === "Security") return base;
+    if (activeTab === "Moderation") {
+      return [
+        { label: "Actions Logged", value: "850+", icon: Shield, trend: "+24%" },
+        { label: "Active Staff", value: "14", icon: Zap, trend: "Stable" },
+        { label: "Warns Issued", value: "122", icon: Command, trend: "+8%" },
+        { label: "Bans Sync", value: "Active", icon: Package, trend: "Global" },
+      ];
+    }
+    if (activeTab === "Music") {
+      return [
+        { label: "Tracks Played", value: "4.2k", icon: Music, trend: "+18%" },
+        { label: "Active Nodes", value: "4", icon: Zap, trend: "100%" },
+        { label: "Playlists", value: "840", icon: Command, trend: "Sync" },
+        { label: "Users Listening", value: "240", icon: Package, trend: "+12%" },
+      ];
+    }
+    // Default variations for other tabs
+    return base.map((s, i) => ({
+      ...s,
+      value: i === 0 ? `${100 + activeTab.length * 5}+` : s.value,
+    }));
+  }, [activeTab]);
+
+  const activeLogs = useMemo(() => {
+    const logsMap: Record<string, string[]> = {
+      Security: [
+        "antinuke enable",
+        "server shield armed • whitelist synced",
+        "lockdown all",
+        "emergency protocols active",
+        "security audit completed",
+      ],
+      Moderation: [
+        "warn @user spamming",
+        "user warned • case #842",
+        "mute @user toxicity",
+        "user muted for 2h",
+        "purge 100",
+        "cleared 100 messages",
+      ],
+      Music: [
+        "play lo-fi hip hop",
+        "now playing: Lofi Girl",
+        "volume 80",
+        "volume set to 80%",
+        "queue add chill-mix",
+        "added 12 tracks to queue",
+      ],
+      Tickets: [
+        "ticket create support",
+        "ticket #0421 opened",
+        "ticket claim",
+        "staff member joined ticket",
+        "ticket close",
+        "transcript saved to logs",
+      ],
+    };
+    const lines = logsMap[activeTab] || [
+      `${activeTab.toLowerCase()} system init`,
+      "waiting for input...",
+      "checking permissions",
+      "access granted",
+    ];
+    return [...lines, ...lines];
+  }, [activeTab]);
+
   return (
     <section className={cn("px-5 lg:px-8", showHeading ? "py-24" : "pb-24 pt-4")}>
       <div className="mx-auto max-w-7xl">
@@ -692,7 +768,7 @@ export function DashboardPreview({ showHeading = true }: { showHeading?: boolean
                 </Button>
               </div>
               <div className="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
-                {dashboardStats.map((item) => (
+                {activeStats.map((item) => (
                   <div key={item.label} className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
                     <div className="mb-5 flex items-center justify-between">
                       <item.icon className="h-5 w-5 text-prime-blue" />
@@ -759,11 +835,11 @@ export function DashboardPreview({ showHeading = true }: { showHeading?: boolean
                   <div className="relative flex h-44 flex-col rounded-3xl border border-white/10 bg-black/35 p-5">
                     <p className="mb-4 shrink-0 font-black text-white opacity-80">Activity Logs</p>
                     <div className="relative flex-1 overflow-hidden">
-                      <div className="animate-terminal space-y-4">
-                        {[...terminalLines, ...terminalLines].map((line, index) => (
+                      <div key={activeTab} className="animate-terminal space-y-4">
+                        {activeLogs.map((line, index) => (
                           <p key={index} className="font-mono text-[0.7rem] tracking-tight text-zinc-400">
                             <span className="mr-2 text-prime-blue/70">prime:~$</span>
-                            <span className="text-zinc-200">{line.replace("> ", "")}</span>
+                            <span className="text-zinc-200">{line}</span>
                           </p>
                         ))}
                       </div>
